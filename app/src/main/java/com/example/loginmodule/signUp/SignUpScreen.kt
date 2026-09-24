@@ -5,9 +5,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.layout.onVisibilityChangedNode
 
 @Composable
-fun SignUpScreen(){
+fun SignUpScreen(
+    onSignUpSuccess: ()-> Unit,
+    onNavigateBack: () -> Unit
+){
     var uiState by remember { mutableStateOf(SignUpUiState()) }
 
 
@@ -20,7 +24,12 @@ fun SignUpScreen(){
         onPasswordVisibilityChange = {uiState = uiState.copy(isPasswordVisible = !uiState.isPasswordVisible)},
         onSignUpClick = {
             uiState = validateSignUp(uiState)
-        }
+            if (uiState.nameError == null && uiState.emailError == null &&
+                        uiState.passwordError == null && uiState.confirmPasswordError == null){
+                onSignUpSuccess()
+            }
+        },
+        onBackClick = onNavigateBack
 
     )
 

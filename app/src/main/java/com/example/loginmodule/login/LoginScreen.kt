@@ -9,7 +9,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun LoginScreen(){
+fun LoginScreen(
+    onLoginSuccess: () ->Unit,
+    onNavigateToSignUp: () -> Unit
+){
     var uiState by remember {
         mutableStateOf(LoginUiState())
     }
@@ -41,10 +44,12 @@ fun LoginScreen(){
             uiState = validateLogin(uiState)
 
             if (uiState.emailError == null && uiState.passwordError ==null){
+                onLoginSuccess()
 
             }
 
-        }
+        },
+        onSignUpClick = onNavigateToSignUp
 
 
 
@@ -55,7 +60,10 @@ fun LoginScreen(){
 @Composable
 fun LoginScreenPreview(){
     MaterialTheme{
-        LoginScreen()
+        LoginScreen(
+            onLoginSuccess = {},
+            onNavigateToSignUp = {}
+        )
     }
 }
 

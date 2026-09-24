@@ -39,7 +39,8 @@ fun LoginContent(
     onEmailChange:(String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onPasswordVisibilityChange:()-> Unit,
-    onLoginClick:()->Unit
+    onLoginClick:()->Unit,
+    onSignUpClick: () -> Unit
 
 ){
 
@@ -139,7 +140,7 @@ fun LoginContent(
 
             ) {
                 Text(text ="Don't have an account? " )
-                TextButton(onClick = {}) {
+                TextButton(onClick = onSignUpClick) {
                     Text(text = "Sign Up")
                 }
 
@@ -163,7 +164,8 @@ fun LoginContentPreview(){
             onEmailChange = {},
             onPasswordChange = {},
             onPasswordVisibilityChange = {},
-            onLoginClick = {}
+            onLoginClick = {},
+            onSignUpClick = {}
 
         )
     }
